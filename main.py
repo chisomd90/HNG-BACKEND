@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/get_info', methods=['GET'])
+@app.route('/api', methods=['GET'])
 def get_info():
     # Get query parameters
     slack_name = request.args.get('slack_name')
