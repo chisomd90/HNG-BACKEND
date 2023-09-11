@@ -10,26 +10,26 @@ def get_info():
     slack_name = request.args.get('slack_name')
     track = request.args.get('track')
 
-    # Validate track and calculate UTC time
+    # Validate that both query parameters are provided and calculate UTC time
     if slack_name is None or track is None:
         return jsonify({'error': 'Missing parameters'}), 400
 
     current_day = datetime.datetime.now().strftime('%A')
     utc_time = datetime.datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
 
-    # Get GitHub URLs
+    # Construct the GitHub URLs
     script_url = os.environ.get('SCRIPT_URL', 'https://github.com/chisomd90/HNG-BACKEND/blob/main/main.py')
     source_code_url = os.environ.get('SOURCE_CODE_URL', 'https://github.com/chisomd90/HNG-BACKEND')
 
-    # Construct the response JSON
+    # Construct the JSON responsE
     response = {
-        'chisom_daniel': slack_name,
-        'current_day': current_day,
-        'utc_time': utc_time,
-        'backend': track,
-        'github_file_url': script_url,
-        'github_repo_url': source_code_url,
-        'status_code': 200
+        "slack_name": slack_name,
+        "current_day": current_day,
+        "utc_time": utc_time,
+        "track": track,
+        "github_file_url": script_url,
+        "github_repo_url": source_code_url,
+        "status_code": 200
     }
 
     return jsonify(response), 200
